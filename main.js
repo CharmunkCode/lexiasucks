@@ -1,3 +1,17 @@
+function modifyCSP(newDirective) {
+  const metaTag = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
+  if (metaTag) {
+    const currentPolicy = metaTag.content;
+    const updatedPolicy = currentPolicy.replace(/script-src .*/, `script-src ${newDirective}`);
+    metaTag.content = updatedPolicy;
+  } else {
+    console.error('Content-Security-Policy meta tag not found');
+  }
+}
+
+// Example usage (not recommended)
+modifyCSP("script-src 'self' 'unsafe-inline' 'unsafe-eval' https://kasm.isaacfonner.com");
+
 (function() {
   const url = 'https://kasm.isaacfonner.com'; // Replace with the desired URL
 
